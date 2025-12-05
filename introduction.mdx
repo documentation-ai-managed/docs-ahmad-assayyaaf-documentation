@@ -1,0 +1,115 @@
+---
+title: Introduction
+description: Overview of Ahmad Assayyaaf and its core capabilities
+---
+
+## Getting Started with Ahmad Assayyaaf
+
+Ahmad Assayyaaf is a comprehensive workspace platform that combines AI-powered search, writing, and note-taking tools into a flexible environment designed to boost team productivity. Whether you're collaborating on projects, organizing ideas, or generating content, our platform provides an integrated solution that adapts to your workflow needs.
+
+<Columns cols={3}>
+  <Card title="AI Search" icon="search" href="#ai-search">
+    Discover information instantly with intelligent search capabilities that understand context and intent.
+  </Card>
+  <Card title="Smart Writing" icon="edit" href="#smart-writing">
+    Generate high-quality content with AI assistance that maintains your voice and style.
+  </Card>
+  <Card title="Note Taking" icon="file-text" href="#note-taking">
+    Capture and organize thoughts seamlessly with advanced note-taking features.
+  </Card>
+</Columns>
+
+## Key Features
+
+Ahmad Assayyaaf offers a suite of powerful tools that work together to create an efficient workspace environment. Our platform is designed for teams of all sizes, from startups to large enterprises.
+
+<Tabs>
+  <Tab title="Workspace Management" icon="layout">
+    Create and manage multiple workspaces for different projects or teams. Each workspace includes customizable settings, member permissions, and integration options.
+    
+    <Callout kind="tip">Use workspace templates to quickly set up new projects with predefined configurations.</Callout>
+    
+    <Expandable title="Advanced Workspace Settings" default-open="false">
+      Configure notification preferences, access controls, and integration endpoints for each workspace.
+    </Expandable>
+  </Tab>
+  <Tab title="AI Tools" icon="cpu">
+    Leverage our collection of AI-powered tools for various tasks:
+    
+    - **Intelligent Search**: Find information across all your documents and notes
+    - **Content Generation**: Create articles, summaries, and reports
+    - **Smart Organization**: Automatically categorize and tag content
+    
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const aiSearch = await ahmad.search({
+  query: 'project deadlines',
+  workspace: 'team-alpha',
+  filters: { date: 'this-week' }
+});
+console.log(aiSearch.results);
+```
+      ```python
+from ahmad_api import AhmadClient
+
+client = AhmadClient(api_key='your-key')
+results = client.search(
+    query='meeting notes',
+    workspace_id='team-beta',
+    limit=10
+)
+print(results)
+```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Integration and Collaboration
+
+Connect Ahmad Assayyaaf with your existing tools and enable seamless collaboration across your team.
+
+<Steps>
+  <Step title="Connect Your Tools" icon="link">
+    Integrate with popular platforms like Slack, Google Workspace, and Microsoft Teams.
+    
+    <ExpandableGroup>
+      <Expandable title="Slack Integration" default-open="false">Add Ahmad Assayyaaf to your Slack channels for real-time collaboration and AI assistance.</Expandable>
+      <Expandable title="Google Workspace" default-open="false">Sync documents and calendars for enhanced productivity.</Expandable>
+    </ExpandableGroup>
+  </Step>
+  <Step title="Invite Team Members" icon="users">
+    Add colleagues to your workspaces and assign appropriate permissions.
+    
+    <Callout kind="info">Team members can access shared workspaces from any device with real-time synchronization.</Callout>
+  </Step>
+  <Step title="Start Creating" icon="play">
+    Begin using AI tools to search, write, and organize your work.
+    
+    <CodeGroup tabs="cURL,Bash">
+      ```bash
+curl -X POST https://api.ahmadassayyaaf.com/v1/workspaces \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "New Project", "description": "Team collaboration space"}'
+```
+      ```bash
+ahmad workspace create --name "Research Project" --description "AI research workspace"
+```
+    </CodeGroup>
+  </Step>
+</Steps>
+
+## Why Choose Ahmad Assayyaaf?
+
+Our platform stands out with its focus on productivity and ease of use. The AI tools are designed to augment human creativity rather than replace it, ensuring that you maintain control over your work while benefiting from intelligent assistance.
+
+<Columns cols={2}>
+  <Card title="Productivity Boost" icon="zap" href="#productivity">
+    Reduce time spent on routine tasks and focus on creative work.
+  </Card>
+  <Card title="Team Collaboration" icon="users" href="#collaboration">
+    Work together seamlessly with real-time editing and shared access.
+  </Card>
+</Columns>
+
+Ready to transform your workflow? Get started by creating your first workspace and exploring our AI tools. With Ahmad Assayyaaf, you'll discover a new way to work smarter, not harder.

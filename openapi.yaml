@@ -1,0 +1,186 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Ahmad Assayyaaf API
+  license:
+    name: MIT
+servers:
+  - url: https://api.ahmadassayyaaf.com/v1
+paths:
+  /workspaces:
+    get:
+      summary: List all workspaces for the authenticated user
+      operationId: listWorkspaces
+      parameters:
+        - name: limit
+          in: query
+          description: How many workspaces to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paginated array of workspaces
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspaces'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new workspace with specified settings and team members
+      operationId: createWorkspace
+      responses:
+        201:
+          description: Workspace successfully created with unique identifier
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /workspaces/{workspaceId}:
+    get:
+      summary: Retrieve detailed information about a specific workspace including settings and members
+      operationId: getWorkspaceById
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The unique identifier of the workspace to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Complete workspace details including configuration and access permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspaces'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update an existing workspace with new settings or member changes
+      operationId: updateWorkspace
+      responses:
+        200:
+          description: Workspace updated successfully with modified settings applied
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /documents:
+    get:
+      summary: Retrieve a list of documents across all accessible workspaces with optional filtering
+      operationId: listDocuments
+      parameters:
+        - name: workspace
+          in: query
+          description: Filter documents by specific workspace identifier
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of documents to return (default 50, max 200)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Paginated collection of documents with metadata and content previews
+          headers:
+            x-next:
+              description: Link to retrieve the next page of document results
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new document in the specified workspace with initial content
+      operationId: createDocument
+      responses:
+        201:
+          description: Document created successfully and ready for editing or sharing
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Workspace:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+    Workspaces:
+      type: array
+      items:
+        $ref: '#/components/schemas/Workspace'
+    Document:
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        workspaceId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    Documents:
+      type: array
+      items:
+        $ref: '#/components/schemas/Document'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

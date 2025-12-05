@@ -1,0 +1,192 @@
+---
+title: Core Features
+description: Explore the key features and capabilities of Ahmad Assayyaaf
+---
+
+## AI-Powered Search
+
+Our intelligent search feature goes beyond simple keyword matching to understand context and intent, helping you find exactly what you need.
+
+<Tabs>
+  <Tab title="Natural Language Search" icon="search">
+    Ask questions in plain English and get relevant results from across your workspace.
+    
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const results = await ahmad.search({
+  query: 'What are the deadlines for Q4 projects?',
+  workspace: 'company-workspace',
+  sortBy: 'relevance'
+});
+console.log(`Found ${results.length} relevant items`);
+```
+      ```python
+search_results = client.natural_language_search(
+    query="Show me all documents about AI integration",
+    workspace_id="tech-team",
+    include_attachments=True
+)
+for result in search_results:
+    print(f"{result.title}: {result.snippet}")
+```
+    </CodeGroup>
+    
+    <Callout kind="tip">Use specific questions for better results, and the AI learns from your interactions to improve future searches.</Callout>
+  </Tab>
+  <Tab title="Advanced Filters" icon="filter">
+    Narrow down results with powerful filtering options.
+    
+    <Expandable title="Filter Options" default-open="true">
+      | Filter Type | Description | Example |
+      |-------------|-------------|---------|
+      | Date Range | Limit to specific time periods | `last-week`, `this-month` |
+      | Content Type | Documents, notes, or images | `type:document` |
+      | Author | Content created by specific users | `author:john.doe` |
+      | Tags | Items with specific tags | `tags:urgent,review` |
+    </Expandable>
+  </Tab>
+</Tabs>
+
+## Smart Writing Assistant
+
+Enhance your writing with AI-powered suggestions, grammar checking, and content generation tools.
+
+<Columns cols={2}>
+  <Card title="Content Generation" icon="edit" href="#content-gen">
+    Generate articles, summaries, and reports with AI assistance that maintains your unique voice.
+  </Card>
+  <Card title="Grammar & Style" icon="check-circle" href="#grammar-style">
+    Get real-time feedback on grammar, clarity, and writing style.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Start Writing" icon="keyboard">
+    Open a new document and begin typing. The AI assistant will provide suggestions as you write.
+    
+    <Expandable title="Writing Modes" default-open="false">
+      Choose from different writing modes: creative, professional, concise, or conversational.
+    </Expandable>
+  </Step>
+  <Step title="Use AI Suggestions" icon="cpu">
+    Accept, modify, or ignore AI-generated suggestions for improved content.
+    
+    <CodeGroup tabs="API Example,cURL">
+      ```javascript
+const suggestions = await ahmad.getWritingSuggestions({
+  text: 'The company is launching a new product',
+  mode: 'professional',
+  tone: 'enthusiastic'
+});
+console.log(suggestions);
+```
+      ```bash
+curl -X POST https://api.ahmadassayyaaf.com/v1/writing/suggestions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Our team completed the project", "style": "formal"}'
+```
+    </CodeGroup>
+  </Step>
+  <Step title="Generate Content" icon="plus">
+    Use prompts to generate entire sections or documents from scratch.
+    
+    <Callout kind="info">Content generation works best with specific, detailed prompts that include your requirements and target audience.</Callout>
+  </Step>
+</Steps>
+
+## Intelligent Note-Taking
+
+Organize your thoughts and ideas with smart note-taking features that automatically categorize and connect related content.
+
+<ExpandableGroup>
+  <Expandable title="Auto-Categorization" default-open="true">
+    Notes are automatically tagged and categorized based on content analysis.
+    
+    <Tabs>
+      <Tab title="Manual Tags" icon="tag">Add your own tags for custom organization.</Tab>
+      <Tab title="Smart Tags" icon="cpu">Let AI suggest relevant tags based on content.</Tab>
+    </Tabs>
+  </Expandable>
+  <Expandable title="Note Linking" default-open="false">
+    Connect related notes and documents to create a knowledge network.
+    
+    <CodeGroup tabs="Link Creation,CLI">
+      ```javascript
+const link = await ahmad.createNoteLink({
+  sourceNote: 'meeting-notes-2024-01',
+  targetNote: 'project-timeline',
+  relationship: 'related-to'
+});
+console.log(`Link created: ${link.id}`);
+```
+      ```bash
+ahmad notes link --source meeting-123 --target project-plan --type "supports"
+```
+    </CodeGroup>
+  </Expandable>
+</ExpandableGroup>
+
+## Collaboration Tools
+
+Work seamlessly with your team using real-time collaboration features.
+
+<Columns cols={3}>
+  <Card title="Real-Time Editing" icon="users" href="#real-time">
+    See changes as team members type and edit documents together.
+  </Card>
+  <Card title="Comments & Feedback" icon="message-circle" href="#comments">
+    Add comments, suggest edits, and discuss content directly in documents.
+  </Card>
+  <Card title="Version History" icon="history" href="#versions">
+    Track changes and revert to previous versions when needed.
+  </Card>
+</Columns>
+
+<Callout kind="tip">Enable notifications to stay updated on team activity and document changes.</Callout>
+
+## Integration Capabilities
+
+Connect Ahmad Assayyaaf with your favorite tools for a seamless workflow.
+
+<Tabs>
+  <Tab title="Slack Integration" icon="message-square">
+    Get notifications and interact with AI tools directly in Slack.
+    
+    <Steps>
+      <Step title="Install App" icon="download">Add Ahmad Assayyaaf to your Slack workspace.</Step>
+      <Step title="Configure Channels" icon="settings">Choose which channels receive updates.</Step>
+      <Step title="Start Using" icon="play">Use `/ahmad search` and other commands.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="API Access" icon="code">
+    Build custom integrations using our comprehensive REST API.
+    
+    <CodeGroup tabs="Authentication,Basic Request">
+      ```javascript
+const client = new AhmadClient({
+  apiKey: process.env.AHMAD_API_KEY,
+  baseUrl: 'https://api.ahmadassayyaaf.com/v1'
+});
+```
+      ```bash
+curl -X GET https://api.ahmadassayyaaf.com/v1/workspaces \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Security and Privacy
+
+Your data is protected with enterprise-grade security measures.
+
+<Expandable title="Security Features" default-open="true">
+  - End-to-end encryption for all data
+  - Role-based access controls
+  - Audit logs for compliance
+  - SOC 2 Type II certified infrastructure
+  
+  <Callout kind="info">All AI processing happens securely within our infrastructure, and your data is never shared with third parties.</Callout>
+</Expandable>

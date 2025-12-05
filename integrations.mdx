@@ -1,0 +1,213 @@
+---
+title: Integrations
+description: Learn how to connect Ahmad Assayyaaf with other tools and platforms
+---
+
+## Overview of Integrations
+
+Ahmad Assayyaaf integrates seamlessly with popular productivity tools and platforms, allowing you to maintain your existing workflows while enhancing them with AI capabilities.
+
+<Columns cols={3}>
+  <Card title="Communication" icon="message-square" href="#communication">
+    Connect with Slack, Microsoft Teams, and other chat platforms.
+  </Card>
+  <Card title="Productivity" icon="calendar" href="#productivity">
+    Sync with Google Workspace, Microsoft 365, and project management tools.
+  </Card>
+  <Card title="Development" icon="code" href="#development">
+    Integrate with GitHub, Jira, and other development platforms.
+  </Card>
+</Columns>
+
+## Setting Up Integrations
+
+Follow these steps to connect external services with your Ahmad Assayyaaf workspace.
+
+<Steps>
+  <Step title="Access Settings" icon="settings">
+    Navigate to your workspace settings and select the "Integrations" tab.
+    
+    <Callout kind="info">Integration settings are available to workspace administrators and can be configured per workspace.</Callout>
+  </Step>
+  <Step title="Choose Integration" icon="plus">
+    Select the service you want to connect from the available options.
+    
+    <Expandable title="Popular Integrations" default-open="true">
+      - Slack for team communication
+      - Google Drive for file storage
+      - GitHub for code repository access
+      - Jira for project management
+      - Microsoft Teams for enterprise collaboration
+    </Expandable>
+  </Step>
+  <Step title="Authorize Access" icon="key">
+    Grant necessary permissions for the integration to function.
+    
+    <Tabs>
+      <Tab title="OAuth Flow" icon="lock">
+        Use secure OAuth authentication for most integrations.
+        
+        <CodeGroup tabs="OAuth Setup,API Key">
+          ```javascript
+const oauth = await ahmad.integrations.oauth({
+  provider: 'slack',
+  scopes: ['channels:read', 'chat:write'],
+  redirectUrl: 'https://app.ahmadassayyaaf.com/oauth/callback'
+});
+window.location.href = oauth.authorizationUrl;
+```
+          ```bash
+curl -X POST https://api.ahmadassayyaaf.com/v1/integrations/github \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"token": "github_personal_access_token"}'
+```
+        </CodeGroup>
+      </Tab>
+      <Tab title="Webhook Configuration" icon="webhook">
+        Set up webhooks for real-time data synchronization.
+        
+        <Expandable title="Webhook Events" default-open="false">Configure webhooks to trigger on document updates, new comments, or workspace changes.</Expandable>
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+## Slack Integration
+
+Connect Ahmad Assayyaaf with Slack to bring AI-powered productivity directly into your conversations.
+
+<Tabs>
+  <Tab title="Setup" icon="settings">
+    Install the Ahmad Assayyaaf app in your Slack workspace.
+    
+    <Steps>
+      <Step title="Install App" icon="download">Click "Add to Slack" and authorize the app.</Step>
+      <Step title="Configure Channels" icon="hash">Choose which channels can interact with Ahmad Assayyaaf.</Step>
+      <Step title="Set Permissions" icon="shield">Configure what the integration can access.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Usage" icon="message-circle">
+    Use Ahmad Assayyaaf commands directly in Slack.
+    
+    <CodeGroup tabs="Search Command,Create Note">
+      ```bash
+/ahmad search "project deadlines this week"
+```
+      ```bash
+/ahmad note "Meeting with client - discuss pricing" --workspace sales
+```
+    </CodeGroup>
+    
+    <Callout kind="tip">Use the `/ahmad help` command to see all available Slack commands.</Callout>
+  </Tab>
+</Tabs>
+
+## Google Workspace Integration
+
+Sync documents, calendars, and drive files with Ahmad Assayyaaf for enhanced productivity.
+
+<ExpandableGroup>
+  <Expandable title="Google Drive Sync" default-open="true">
+    Automatically sync files between Google Drive and Ahmad Assayyaaf workspaces.
+    
+    <Columns cols={2}>
+      <Card title="File Sync" icon="file" href="#file-sync">Keep documents synchronized across platforms.</Card>
+      <Card title="Version Control" icon="git-branch" href="#version-control">Track changes and maintain version history.</Card>
+    </Columns>
+  </Expandable>
+  <Expandable title="Google Calendar" default-open="false">
+    Connect your calendar to schedule AI-assisted meetings and reminders.
+    
+    <CodeGroup tabs="Calendar API,Event Creation">
+      ```javascript
+const calendar = await ahmad.integrations.googleCalendar({
+  action: 'create-event',
+  title: 'Team Standup',
+  attendees: ['team@company.com'],
+  startTime: '2024-01-15T09:00:00Z'
+});
+console.log(`Event created: ${calendar.eventId}`);
+```
+      ```bash
+google-calendar create-event --title "AI Demo" --attendees "product@company.com" --start "2024-01-16 14:00"
+```
+    </CodeGroup>
+  </Expandable>
+</ExpandableGroup>
+
+## API-Based Integrations
+
+Build custom integrations using our comprehensive REST API and webhooks.
+
+<Tabs>
+  <Tab title="REST API" icon="code">
+    Access all Ahmad Assayyaaf features programmatically.
+    
+    <Expandable title="API Endpoints" default-open="true">
+      | Endpoint | Method | Description |
+      |----------|--------|-------------|
+      | `/workspaces` | GET | List workspaces |
+      | `/documents` | POST | Create document |
+      | `/search` | GET | Perform AI search |
+      | `/integrations` | POST | Configure integration |
+    </Expandable>
+    
+    <CodeGroup tabs="Node.js,Python SDK">
+      ```javascript
+const AhmadAPI = require('ahmad-api');
+const client = new AhmadAPI({ apiKey: 'your-key' });
+
+const workspaces = await client.getWorkspaces();
+console.log(workspaces);
+```
+      ```python
+from ahmad_sdk import AhmadClient
+
+client = AhmadClient(api_key='your-api-key')
+documents = client.list_documents(workspace_id='ws-123')
+for doc in documents:
+    print(doc.title)
+```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Webhooks" icon="webhook">
+    Receive real-time notifications about workspace events.
+    
+    <Steps>
+      <Step title="Create Webhook" icon="plus">Register a webhook endpoint in your workspace settings.</Step>
+      <Step title="Configure Events" icon="settings">Choose which events trigger notifications.</Step>
+      <Step title="Handle Payloads" icon="server">Process webhook payloads in your application.</Step>
+    </Steps>
+    
+    <Expandable title="Webhook Events" default-open="false">Document created, updated, deleted; workspace changes; user invitations; AI tool usage.</Expandable>
+  </Tab>
+</Tabs>
+
+## Troubleshooting Integrations
+
+Common issues and solutions for integration setup.
+
+<Callout kind="alert">If an integration fails, check the error logs in your workspace settings for detailed information.</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Authentication Errors" default-open="false">
+    Ensure API keys are valid and permissions are correctly set.
+    
+    <CodeGroup tabs="Check API Key,Regenerate Token">
+      ```bash
+curl -X GET https://api.ahmadassayyaaf.com/v1/auth/verify \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+      ```javascript
+const newToken = await ahmad.auth.regenerateToken({
+  integration: 'slack',
+  workspace: 'your-workspace'
+});
+```
+    </CodeGroup>
+  </Expandable>
+  <Expandable title="Sync Issues" default-open="false">
+    Verify network connectivity and check integration status in settings.
+  </Expandable>
+</ExpandableGroup>
